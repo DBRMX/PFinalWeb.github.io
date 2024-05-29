@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="icon" href="favicon.ico">
-        <title>Timer Agency Template</title>
+        <title>Chat</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="">
@@ -33,6 +33,34 @@
         <link rel="stylesheet" href="plugins/facncybox/jquery.fancybox.css">
         <!-- template main css file -->
         <link rel="stylesheet" href="css/style.css">
+
+        <!-- Custom CSS for Chatbot Section -->
+        <style>
+            #chatbot {
+                padding: 50px 0; /* Añadir espacio alrededor */
+                background-color: #9DECFA; /* Paleta de colores */
+                color: #035361; /* Texto en color */
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 600px; /* Limitar ancho */
+                margin: 0 auto; /* Centrar dentro del contenedor */
+            }
+            .options {
+                margin-top: 20px;
+            }
+            .options button {
+                margin-right: 10px;
+                background-color: #228394; /* Paleta de colores */
+                color: #fff; /* Texto en color blanco */
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .options button:hover {
+                background-color: #56B6C7; /* Paleta de colores */
+            }
+        </style>
     </head>
 
     <body>
@@ -42,7 +70,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block">
-                            <h2>Chat</h2>
+                            <h2>Chatbot</h2>
                             <ol class="breadcrumb">
                                 <li>
                                     <a href="index.html">
@@ -58,24 +86,25 @@
             </div>
         </section>
 
-<!--=================================
-=            404 Section            =
-==================================-->
-<section class="moduler wrapper_404">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="text-center">
-                    <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >404</h1>
-                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">Opps! Estamos teniendo problemas</h2>
-                    <p class="wow fadeInUp animated" data-wow-delay=".9s">La página que estas buscando ha sido movida, removida, renombrada o aún no está lista.</p>
-                    <a href="index.html" class="btn btn-dafault btn-home wow fadeInUp animated" data-wow-delay="1.1s">Ir al Inicio</a>
-                    
+        <!-- Chatbot Section -->
+        <section id="chatbot">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chat">
+                            <div class="message">
+                                <p><strong>Chatbot:</strong> Hola, ¿en qué puedo ayudarte?</p>
+                            </div>
+                            <div class="options">
+                                <button onclick="handleOption('no_encuentro')">No encuentro cierto contenido</button>
+                                <button onclick="handleOption('contacto')">Cómo contacto con el equipo de desarrollo</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+        <!-- End Chatbot Section -->
 
             <!--
             ==================================================
@@ -157,5 +186,28 @@
 	<script src="plugins/facncybox/jquery.fancybox.js"></script>
 	<!-- template main js -->
 	<script src="js/main.js"></script>
+
+    <script>
+        function handleOption(option) {
+            switch(option) {
+                case 'no_encuentro':
+                    showMessage("No encuentro cierto contenido. ¿En qué página o sección tienes dificultades?");
+                    break;
+                case 'contacto':
+                    showMessage("Puedes contactar con el equipo de desarrollo a través de nuestro correo electrónico: 183636@upslp.edu.mx");
+                    break;
+                default:
+                    showMessage("Lo siento, no entendí tu opción.");
+            }
+        }
+    
+        function showMessage(message) {
+            var chat = document.querySelector('.chat');
+            var newMessage = document.createElement('div');
+            newMessage.classList.add('message');
+            newMessage.innerHTML = "<p><strong>Chatbot:</strong> " + message + "</p>";
+            chat.appendChild(newMessage);
+        }
+    </script>
  	</body>
 </html>
