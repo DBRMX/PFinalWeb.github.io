@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="icon" href="favicon.ico">
-        <title>Timer Agency Template</title>
+        <title>Cuestionario</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="">
@@ -33,6 +33,8 @@
         <link rel="stylesheet" href="plugins/facncybox/jquery.fancybox.css">
         <!-- template main css file -->
         <link rel="stylesheet" href="css/style.css">
+        <!-- jsPDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     </head>
 
     <body>
@@ -58,24 +60,47 @@
             </div>
         </section>
 
-<!--=================================
-=            404 Section            =
-==================================-->
-<section class="moduler wrapper_404">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="text-center">
-                    <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >404</h1>
-                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">Opps! Estamos teniendo problemas</h2>
-                    <p class="wow fadeInUp animated" data-wow-delay=".9s">La página que estas buscando ha sido movida, removida, renombrada o aún no está lista.</p>
-                    <a href="index.html" class="btn btn-dafault btn-home wow fadeInUp animated" data-wow-delay="1.1s">Ir al Inicio</a>
-                    
+        <!-- Cuestionario Section Start -->
+        <section id="cuestionario">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="cuestionario-form">
+                            <div class="form-group">
+                                <label>1. ¿Conoces previamente los objetivos de las carreras de la Academia ATIT?</label>
+                                <select class="form-control" id="objetivos">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>2. ¿Conoces previamente la misión de las carreras de la Academia ATIT?</label>
+                                <select class="form-control" id="mision">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>3. ¿Conoces previamente la visión de las carreras de la Academia ATIT?</label>
+                                <select class="form-control" id="vision">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>4. ¿Conocías acerca de la Academia ATIT de una forma general?</label>
+                                <select class="form-control" id="general">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="generarPDF()">Generar PDF</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+        <!-- Cuestionario Section End -->
 
             <!--
             ==================================================
@@ -157,5 +182,27 @@
 	<script src="plugins/facncybox/jquery.fancybox.js"></script>
 	<!-- template main js -->
 	<script src="js/main.js"></script>
+
+    <!-- jsPDF -->
+    <script>
+        function generarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const objetivos = document.getElementById('objetivos').value;
+            const mision = document.getElementById('mision').value;
+            const vision = document.getElementById('vision').value;
+            const general = document.getElementById('general').value;
+
+            doc.text('Cuestionario', 10, 10);
+            doc.text(`1. ¿Conoces previamente los objetivos de las carreras de la Academia ATIT? ${objetivos}`, 10, 20);
+            doc.text(`2. ¿Conoces previamente la misión de las carreras de la Academia ATIT? ${mision}`, 10, 30);
+            doc.text(`3. ¿Conoces previamente la visión de las carreras de la Academia ATIT? ${vision}`, 10, 40);
+            doc.text(`4. ¿Conocías acerca de la Academia ATIT de una forma general? ${general}`, 10, 50);
+
+            doc.save('cuestionario.pdf');
+        }
+    </script>
+
  	</body>
 </html>
